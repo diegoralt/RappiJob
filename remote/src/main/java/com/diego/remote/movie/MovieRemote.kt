@@ -5,7 +5,13 @@ import javax.inject.Inject
 
 class MovieRemote @Inject constructor(private val service: Service) {
 
-    suspend fun fetchMovieRated(token: String, sortBy: String?, accountId: String) =
-        service.fetchMovieRated(token, sortBy, accountId)
+    suspend fun fetchMoviesPopular(key: String, language: String, page: Int = 1) =
+        service.fetchMoviesPopular(key, language, page)
+
+    suspend fun fetchMoviesTopRated(key: String, language: String, page: Int = 1) =
+        service.fetchMoviesTopRated(key, language, page)
+
+    suspend fun fetchMoviesUpcoming(key: String, language: String, page: Int = 1) =
+        service.fetchMoviesUpcoming(key, language, page)
 
 }

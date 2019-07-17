@@ -1,37 +1,42 @@
 package com.diego.remote
 
-import com.diego.remote.model.AccessToken
 import com.diego.remote.model.ApiResult
-import com.diego.remote.model.Authentication
 import com.diego.remote.model.Movie
-import com.diego.remote.model.NewToken
-import com.diego.remote.model.RequestToken
 import com.diego.remote.model.Series
 import retrofit2.Response
-import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface Service {
 
-    @POST("/auth/request_token")
-    suspend fun requestToken(headers: HashMap<String, String>, @Body params: RequestToken): Response<NewToken>
-
-    @POST("/auth/access_token")
-    suspend fun accessToken(headers: HashMap<String, String>, @Body params: AccessToken): Response<Authentication>
-
-    @GET("/account/{account_id}/movie/rated")
-    suspend fun fetchMovieRated(
-        @Header("Authorization") token: String, @Query("sort_by") sortBy: String?,
-        @Path("account_id") accountId: String
+    @GET("/movie/popular")
+    suspend fun fetchMoviesPopular(
+        @Query("api_key") key: String, @Query("language") language: String,
+        @Query("page") page: Int
     ): Response<ApiResult<Movie>>
 
-    @GET("/account/{account_id}/tv/rated")
-    suspend fun fetchSeriesRated(
-        @Header("Authorization") token: String, @Query("sort_by") sortBy: String?,
-        @Path("account_id") accountId: String
+    @GET("/movie/top_rated")
+    suspend fun fetchMoviesTopRated(
+        @Query("api_key") key: String, @Query("language") language: String,
+        @Query("page") page: Int
+    ): Response<ApiResult<Movie>>
+
+    @GET("/movie/upcoming")
+    suspend fun fetchMoviesUpcoming(
+        @Query("api_key") key: String, @Query("language") language: String,
+        @Query("page") page: Int
+    ): Response<ApiResult<Movie>>
+
+    @GET("/tv/popular")
+    suspend fun fetchSeriesPopular(
+        @Query("api_key") key: String, @Query("language") language: String,
+        @Query("page") page: Int
     ): Response<ApiResult<Series>>
+
+    @GET("/tv/top_rated")
+    suspend fun fetchSeriesTopRated(
+        @Query("api_key") key: String, @Query("language") language: String,
+        @Query("page") page: Int
+    ): Response<ApiResult<Series>>
+
 }
