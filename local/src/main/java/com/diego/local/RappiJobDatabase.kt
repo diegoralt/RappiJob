@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.diego.local.dao.MovieDao
-import com.diego.local.dao.SeriesDao
+import com.diego.local.dao.movie.MovieDao
+import com.diego.local.dao.series.SeriesDao
 import com.diego.local.model.Movie
 import com.diego.local.model.Series
 

@@ -1,7 +1,8 @@
-package com.diego.local.dao
+package com.diego.local.dao.series
 
 import androidx.room.Dao
 import androidx.room.Query
+import com.diego.local.dao.BaseDao
 import com.diego.local.model.Series
 import java.util.Date
 
