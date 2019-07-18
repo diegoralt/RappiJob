@@ -6,32 +6,32 @@ import com.google.gson.annotations.SerializedName
 data class Movie(
     @Expose
     @SerializedName("popularity")
-    val popularity: Long? = 0,
+    val popularity: Long,
     @Expose
     @SerializedName("vote_count")
-    val voteCount: Int? = 0,
+    val voteCount: Int,
     @Expose
     @SerializedName("poster_path")
     val posterPath: String? = "",
     @Expose
     @SerializedName("id")
-    val id: Int? = 0,
+    val id: Int,
     @Expose
     @SerializedName("adult")
-    val adult: Boolean? = false,
+    val adult: Boolean,
     @Expose
     @SerializedName("original_language")
-    val originalLanguage: String? = "",
+    val originalLanguage: String,
     @Expose
     @SerializedName("title")
-    val title: String? = "",
+    val title: String,
     @Expose
     @SerializedName("vote_average")
-    val voteAverage: Long? = 0,
+    val voteAverage: Long,
     @Expose
     @SerializedName("overview")
-    val overview: String? = "",
+    val overview: String,
     @Expose
     @SerializedName("release_date")
-    val releaseDate: String? = ""
+    val releaseDate: String
 )
