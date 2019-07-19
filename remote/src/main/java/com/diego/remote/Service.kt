@@ -1,8 +1,8 @@
 package com.diego.remote
 
+import com.diego.model.Movie
+import com.diego.model.Series
 import com.diego.remote.model.ApiResult
-import com.diego.remote.model.Movie
-import com.diego.remote.model.Series
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

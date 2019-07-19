@@ -1,0 +1,13 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    def common_dependencies = rootProject.ext.common_dependencies
+    implementation common_dependencies.kotlin
+
+    def remote_dependencies = rootProject.ext.remote_dependencies
+    implementation remote_dependencies.google_gson
+
+    def local_dependencies = rootProject.ext.local_dependencies
+    implementation local_dependencies.room_runtime
+}

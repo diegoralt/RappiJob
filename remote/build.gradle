@@ -13,6 +13,8 @@ dependencies {
     implementation common_dependencies.kotlin
     implementation common_dependencies.dagger
     kapt common_dependencies.dagger_compiler
+
+    implementation project(path: ':model')
 }
 
 sourceCompatibility = "8"

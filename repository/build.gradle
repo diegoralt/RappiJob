@@ -27,11 +27,6 @@ android {
 }
 
 dependencies {
-    def dependencies = rootProject.ext.local_dependencies
-    implementation dependencies.room_runtime
-    implementation dependencies.room_ktx
-    kapt dependencies.room_compiler
-
     def common_dependencies = rootProject.ext.common_dependencies
     implementation common_dependencies.kotlin
     implementation common_dependencies.dagger
@@ -40,8 +35,6 @@ dependencies {
     androidTestImplementation common_dependencies.test_runner
     androidTestImplementation common_dependencies.espresso_core
 
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-alpha02'
-    androidTestImplementation 'androidx.arch.core:core-testing:2.0.1'
-
-    implementation project(path: ':model')
+    implementation project(path: ':remote')
+    implementation project(path: ':local')
 }

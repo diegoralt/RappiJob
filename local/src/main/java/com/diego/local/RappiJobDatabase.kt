@@ -4,12 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.diego.local.converter.Converters
 import com.diego.local.dao.movie.MovieDao
 import com.diego.local.dao.series.SeriesDao
-import com.diego.local.model.Movie
-import com.diego.local.model.Series
+import com.diego.model.Movie
+import com.diego.model.Series
 
 @Database(entities = [Movie::class, Series::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class RappiJobDatabase : RoomDatabase() {
 
     abstract fun movieDao(): MovieDao
