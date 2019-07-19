@@ -15,11 +15,11 @@ class MovieRepository @Inject constructor(
 
     suspend fun fetchMoviesPopular(key: String, language: String): List<Movie> =
         object : DataDelivery<Response<ApiResult<Movie>>, List<Movie>>() {
-            override suspend fun processResponse(response: Response<ApiResult<Movie>>): List<Movie> {
-                return if (response.isSuccessful) {
-                    response.body()?.results ?: loadFromLocal()
+            override suspend fun processResponse(response: Response<ApiResult<Movie>>): List<Movie>? {
+                return if (response.isSuccessful && response.body() != null) {
+                    response.body()?.results
                 } else {
-                    loadFromLocal()
+                    null
                 }
             }
 
@@ -36,11 +36,11 @@ class MovieRepository @Inject constructor(
 
     suspend fun fetchMoviesTopRated(key: String, language: String): List<Movie> =
         object : DataDelivery<Response<ApiResult<Movie>>, List<Movie>>() {
-            override suspend fun processResponse(response: Response<ApiResult<Movie>>): List<Movie> {
-                return if (response.isSuccessful) {
-                    response.body()?.results ?: loadFromLocal()
+            override suspend fun processResponse(response: Response<ApiResult<Movie>>): List<Movie>? {
+                return if (response.isSuccessful && response.body() != null) {
+                    response.body()?.results
                 } else {
-                    loadFromLocal()
+                    null
                 }
             }
 
@@ -49,7 +49,7 @@ class MovieRepository @Inject constructor(
             }
 
             override suspend fun loadFromLocal(): List<Movie> =
-                movieDao.getMoviesPopular()
+                movieDao.getMoviesTopRated()
 
             override suspend fun createCallAsync(): Response<ApiResult<Movie>> =
                 movieRemote.fetchMoviesTopRated(key, language)
@@ -57,11 +57,11 @@ class MovieRepository @Inject constructor(
 
     suspend fun fetchMoviesUpcoming(key: String, language: String): List<Movie> =
         object : DataDelivery<Response<ApiResult<Movie>>, List<Movie>>() {
-            override suspend fun processResponse(response: Response<ApiResult<Movie>>): List<Movie> {
-                return if (response.isSuccessful) {
-                    response.body()?.results ?: loadFromLocal()
+            override suspend fun processResponse(response: Response<ApiResult<Movie>>): List<Movie>? {
+                return if (response.isSuccessful && response.body() != null) {
+                    response.body()?.results
                 } else {
-                    loadFromLocal()
+                    null
                 }
             }
 

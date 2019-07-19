@@ -13,13 +13,13 @@ import javax.inject.Singleton
 @Module
 class RepositoryModule {
 
-    @Singleton
     @Provides
+    @Singleton
     fun providesMovieRepository(movieRemote: MovieRemote, movieDao: MovieDao): MovieRepository =
         MovieRepository(movieRemote, movieDao)
 
-    @Singleton
     @Provides
+    @Singleton
     fun providesSeriesRepository(seriesRemote: SeriesRemote, seriesDao: SeriesDao): SeriesRepository =
         SeriesRepository(seriesRemote, seriesDao)
 

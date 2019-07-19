@@ -16,9 +16,9 @@ data class Series(
     @SerializedName("poster_path")
     val posterPath: String? = "",
     @SerializedName("popularity")
-    val popularity: Long,
+    val popularity: Float,
     @SerializedName("vote_average")
-    val voteAverage: Long,
+    val voteAverage: Float,
     @SerializedName("first_air_date")
     val firstAirDate: String,
     @SerializedName("original_language")

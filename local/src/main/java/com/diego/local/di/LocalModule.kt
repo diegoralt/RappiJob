@@ -11,18 +11,18 @@ import javax.inject.Singleton
 @Module
 class LocalModule(private val context: Context) {
 
-    @Singleton
     @Provides
+    @Singleton
     fun providesRappiJobDatabase(): RappiJobDatabase =
         RappiJobDatabase.getInstance(context)
 
-    @Singleton
     @Provides
+    @Singleton
     fun providesMovieDao(rappiJobDatabase: RappiJobDatabase): MovieDao =
         rappiJobDatabase.movieDao()
 
-    @Singleton
     @Provides
+    @Singleton
     fun providesSeriesDao(rappiJobDatabase: RappiJobDatabase): SeriesDao =
         rappiJobDatabase.seriesDao()
 }

@@ -1,5 +1,10 @@
 package com.diego.repository.util
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.withContext
+
 abstract class DataDelivery<ResponseType, ResultType> {
 
     suspend fun start(): ResultType =
@@ -9,14 +14,18 @@ abstract class DataDelivery<ResponseType, ResultType> {
             loadFromLocal()
         }
 
-    private suspend fun fetchFromNetwork(): ResultType {
-        val apiResponse = createCallAsync()
-        val resultType = processResponse(apiResponse)
-        saveCallResults(resultType)
-        return resultType
-    }
+    private suspend fun fetchFromNetwork(): ResultType =
+        withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
+            val apiResponse = async { createCallAsync() }
+            val resultType = async { processResponse(apiResponse.await()) }
+            resultType.await()?.also {
+                saveCallResults(it)
+            } ?: run {
+                loadFromLocal()
+            }
+        }
 
-    protected abstract suspend fun processResponse(response: ResponseType): ResultType
+    protected abstract suspend fun processResponse(response: ResponseType): ResultType?
 
     protected abstract suspend fun saveCallResults(items: ResultType)
 

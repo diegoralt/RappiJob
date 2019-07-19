@@ -11,18 +11,18 @@ import javax.inject.Singleton
 @Module
 class RemoteModule(private val baseUrl: String) {
 
-    @Singleton
     @Provides
+    @Singleton
     fun providesService(): Service =
         ServiceFactory.getInstance(baseUrl)
 
-    @Singleton
     @Provides
+    @Singleton
     fun providesMovieRemote(service: Service): MovieRemote =
         MovieRemote(service)
 
-    @Singleton
     @Provides
+    @Singleton
     fun providesSeriesRemote(service: Service): SeriesRemote =
         SeriesRemote(service)
 

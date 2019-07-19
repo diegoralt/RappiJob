@@ -9,13 +9,13 @@ import java.util.Date
 @Dao
 abstract class MovieDao : BaseDao<Movie>() {
 
-    @Query("SELECT * FROM Movie ORDER BY popularity ASC LIMIT 20")
+    @Query("SELECT * FROM Movie ORDER BY popularity ASC LIMIT 30")
     abstract suspend fun getMoviesPopular(): List<Movie>
 
-    @Query("SELECT * FROM Movie ORDER BY voteAverage ASC LIMIT 20")
+    @Query("SELECT * FROM Movie ORDER BY voteAverage ASC LIMIT 30")
     abstract suspend fun getMoviesTopRated(): List<Movie>
 
-    @Query("SELECT * FROM Movie LIMIT 20")
+    @Query("SELECT * FROM Movie LIMIT 30")
     abstract suspend fun getMoviesUpcoming(): List<Movie>
 
     suspend fun saveMovie(movies: List<Movie>) {

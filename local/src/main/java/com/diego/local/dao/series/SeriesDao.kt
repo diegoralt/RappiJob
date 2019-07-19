@@ -9,10 +9,10 @@ import java.util.Date
 @Dao
 abstract class SeriesDao : BaseDao<Series>() {
 
-    @Query("SELECT * FROM Series ORDER BY popularity ASC LIMIT 20")
+    @Query("SELECT * FROM Series ORDER BY popularity ASC LIMIT 30")
     abstract suspend fun getSeriesPopular(): List<Series>
 
-    @Query("SELECT * FROM Series ORDER BY voteAverage ASC LIMIT 20")
+    @Query("SELECT * FROM Series ORDER BY voteAverage ASC LIMIT 30")
     abstract suspend fun getSeriesTopRated(): List<Series>
 
     suspend fun saveSeries(series: List<Series>) {

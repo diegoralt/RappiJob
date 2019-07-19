@@ -33,4 +33,5 @@ dependencies {
     kapt common_dependencies.dagger_compiler
 
     implementation project(path: ':repository')
+    implementation project(path: ':model')
 }

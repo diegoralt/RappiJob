@@ -9,31 +9,31 @@ import retrofit2.http.Query
 
 interface Service {
 
-    @GET("/movie/popular")
+    @GET("movie/popular")
     suspend fun fetchMoviesPopular(
         @Query("api_key") key: String, @Query("language") language: String,
         @Query("page") page: Int
     ): Response<ApiResult<Movie>>
 
-    @GET("/movie/top_rated")
+    @GET("movie/top_rated")
     suspend fun fetchMoviesTopRated(
         @Query("api_key") key: String, @Query("language") language: String,
         @Query("page") page: Int
     ): Response<ApiResult<Movie>>
 
-    @GET("/movie/upcoming")
+    @GET("movie/upcoming")
     suspend fun fetchMoviesUpcoming(
         @Query("api_key") key: String, @Query("language") language: String,
         @Query("page") page: Int
     ): Response<ApiResult<Movie>>
 
-    @GET("/tv/popular")
+    @GET("tv/popular")
     suspend fun fetchSeriesPopular(
         @Query("api_key") key: String, @Query("language") language: String,
         @Query("page") page: Int
     ): Response<ApiResult<Series>>
 
-    @GET("/tv/top_rated")
+    @GET("tv/top_rated")
     suspend fun fetchSeriesTopRated(
         @Query("api_key") key: String, @Query("language") language: String,
         @Query("page") page: Int

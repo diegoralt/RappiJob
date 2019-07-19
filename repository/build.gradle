@@ -38,6 +38,9 @@ dependencies {
     def remote_dependencies = rootProject.ext.remote_dependencies
     implementation remote_dependencies.retrofit
 
+    def app_dependencies = rootProject.ext.app_dependencies
+    implementation app_dependencies.coroutine_core
+
     implementation project(path: ':remote')
     implementation project(path: ':local')
     implementation project(path: ':model')
