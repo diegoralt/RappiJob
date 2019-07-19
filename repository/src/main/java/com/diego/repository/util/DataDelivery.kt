@@ -16,7 +16,7 @@ abstract class DataDelivery<ResponseType, ResultType> {
         return resultType
     }
 
-    protected abstract fun processResponse(response: ResponseType): ResultType
+    protected abstract suspend fun processResponse(response: ResponseType): ResultType
 
     protected abstract suspend fun saveCallResults(items: ResultType)
 

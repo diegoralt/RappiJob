@@ -15,8 +15,13 @@ class MovieRepository @Inject constructor(
 
     suspend fun fetchMoviesPopular(key: String, language: String): List<Movie> =
         object : DataDelivery<Response<ApiResult<Movie>>, List<Movie>>() {
-            override fun processResponse(response: Response<ApiResult<Movie>>): List<Movie> =
-                response.body()?.results ?: arrayListOf()
+            override suspend fun processResponse(response: Response<ApiResult<Movie>>): List<Movie> {
+                return if (response.isSuccessful) {
+                    response.body()?.results ?: loadFromLocal()
+                } else {
+                    loadFromLocal()
+                }
+            }
 
             override suspend fun saveCallResults(items: List<Movie>) {
                 movieDao.saveMovie(items)
@@ -31,8 +36,13 @@ class MovieRepository @Inject constructor(
 
     suspend fun fetchMoviesTopRated(key: String, language: String): List<Movie> =
         object : DataDelivery<Response<ApiResult<Movie>>, List<Movie>>() {
-            override fun processResponse(response: Response<ApiResult<Movie>>): List<Movie> =
-                response.body()?.results ?: arrayListOf()
+            override suspend fun processResponse(response: Response<ApiResult<Movie>>): List<Movie> {
+                return if (response.isSuccessful) {
+                    response.body()?.results ?: loadFromLocal()
+                } else {
+                    loadFromLocal()
+                }
+            }
 
             override suspend fun saveCallResults(items: List<Movie>) {
                 movieDao.saveMovie(items)
@@ -47,8 +57,13 @@ class MovieRepository @Inject constructor(
 
     suspend fun fetchMoviesUpcoming(key: String, language: String): List<Movie> =
         object : DataDelivery<Response<ApiResult<Movie>>, List<Movie>>() {
-            override fun processResponse(response: Response<ApiResult<Movie>>): List<Movie> =
-                response.body()?.results ?: arrayListOf()
+            override suspend fun processResponse(response: Response<ApiResult<Movie>>): List<Movie> {
+                return if (response.isSuccessful) {
+                    response.body()?.results ?: loadFromLocal()
+                } else {
+                    loadFromLocal()
+                }
+            }
 
             override suspend fun saveCallResults(items: List<Movie>) {
                 movieDao.saveMovie(items)

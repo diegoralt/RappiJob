@@ -12,8 +12,13 @@ class SeriesRepository @Inject constructor(private val seriesRemote: SeriesRemot
 
     suspend fun fetchSeriesPopular(key: String, language: String): List<Series> =
         object : DataDelivery<Response<ApiResult<Series>>, List<Series>>() {
-            override fun processResponse(response: Response<ApiResult<Series>>): List<Series> =
-                response.body()?.results ?: arrayListOf()
+            override suspend fun processResponse(response: Response<ApiResult<Series>>): List<Series> {
+                return if (response.isSuccessful) {
+                    response.body()?.results ?: loadFromLocal()
+                } else {
+                    loadFromLocal()
+                }
+            }
 
             override suspend fun saveCallResults(items: List<Series>) {
                 seriesDao.saveSeries(items)
@@ -28,8 +33,13 @@ class SeriesRepository @Inject constructor(private val seriesRemote: SeriesRemot
 
     suspend fun fetchSeriesTopRated(key: String, language: String): List<Series> =
         object : DataDelivery<Response<ApiResult<Series>>, List<Series>>() {
-            override fun processResponse(response: Response<ApiResult<Series>>): List<Series> =
-                response.body()?.results ?: arrayListOf()
+            override suspend fun processResponse(response: Response<ApiResult<Series>>): List<Series> {
+                return if (response.isSuccessful) {
+                    response.body()?.results ?: loadFromLocal()
+                } else {
+                    loadFromLocal()
+                }
+            }
 
             override suspend fun saveCallResults(items: List<Series>) {
                 seriesDao.saveSeries(items)

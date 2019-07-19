@@ -35,6 +35,10 @@ dependencies {
     androidTestImplementation common_dependencies.test_runner
     androidTestImplementation common_dependencies.espresso_core
 
+    def remote_dependencies = rootProject.ext.remote_dependencies
+    implementation remote_dependencies.retrofit
+
     implementation project(path: ':remote')
     implementation project(path: ':local')
+    implementation project(path: ':model')
 }
