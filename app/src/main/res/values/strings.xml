@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RappiJob</string>
+    <string name="app_name" translatable="false">RappiJob</string>
     <string name="menu_movies">Movies</string>
     <string name="menu_series">Series</string>
     <string name="empty_items">No results</string>

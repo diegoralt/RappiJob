@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_movies">Películas</string>
+    <string name="menu_series">Series</string>
+    <string name="empty_items">Sin resultados</string>
+    <string name="no_internet">Verifica tu conexión a internet</string>
+    <string name="year_label">Año: %s</string>
+    <string name="popularity_label">Popularidad: %.2f</string>
+    <string name="average_label">Promedio: %.2f</string>
+    <string name="overview_label">Resumen:\n%s</string>
+
+    <string-array name="array_dropdown">
+        <item>Popular</item>
+        <item>Mejor Valorado</item>
+        <item>Próximamente</item>
+    </string-array>
+</resources>
