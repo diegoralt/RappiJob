@@ -1,6 +1,8 @@
 # RappiJob
 
 ## Arquitectura
+![Clean Architecture](https://miro.medium.com/max/1838/1*B7LkQDyDqLN3rRSrNYkETA.jpeg)
+
 El proyecto esta separado en diferentes módulos o capas, dentro de cada módulo se hace una separación por feature, se utiliza la librería Dagger para proveer las clases de un módulo a otro.
 
 - Model
