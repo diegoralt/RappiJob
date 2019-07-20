@@ -15,4 +15,7 @@ class MovieUseCases @Inject constructor(private val movieRepository: MovieReposi
     suspend fun fetchMoviesUpcoming(key: String, language: String): List<Movie> =
         movieRepository.fetchMoviesUpcoming(key, language)
 
+    suspend fun searchMovies(key: String, language: String, query: String): List<Movie> =
+        movieRepository.searchMovies(key, language, query)
+
 }

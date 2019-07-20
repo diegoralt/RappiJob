@@ -75,4 +75,25 @@ class MovieRepository @Inject constructor(
             override suspend fun createCallAsync(): Response<ApiResult<Movie>> =
                 movieRemote.fetchMoviesUpcoming(key, language)
         }.start()
+
+    suspend fun searchMovies(key: String, language: String, query: String): List<Movie> =
+        object : DataDelivery<Response<ApiResult<Movie>>, List<Movie>>() {
+            override suspend fun processResponse(response: Response<ApiResult<Movie>>): List<Movie>? {
+                return if (response.isSuccessful && response.body() != null) {
+                    response.body()?.results
+                } else {
+                    null
+                }
+            }
+
+            override suspend fun saveCallResults(items: List<Movie>) {
+                movieDao.saveMovie(items)
+            }
+
+            override suspend fun loadFromLocal(): List<Movie> =
+                movieDao.searchMovies("%$query%")
+
+            override suspend fun createCallAsync(): Response<ApiResult<Movie>> =
+                movieRemote.searchMovie(key, language, query)
+        }.start()
 }

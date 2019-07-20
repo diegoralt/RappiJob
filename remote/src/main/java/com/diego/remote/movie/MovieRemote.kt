@@ -14,4 +14,7 @@ class MovieRemote @Inject constructor(private val service: Service) {
     suspend fun fetchMoviesUpcoming(key: String, language: String, page: Int = 1) =
         service.fetchMoviesUpcoming(key, language, page)
 
+    suspend fun searchMovie(key: String, language: String, query: String, page: Int = 1) =
+        service.searchMovie(key, language, query, page)
+
 }

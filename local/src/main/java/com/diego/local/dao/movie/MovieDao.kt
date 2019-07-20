@@ -18,6 +18,9 @@ abstract class MovieDao : BaseDao<Movie>() {
     @Query("SELECT * FROM Movie LIMIT 30")
     abstract suspend fun getMoviesUpcoming(): List<Movie>
 
+    @Query("SELECT * FROM Movie WHERE title LIKE :query LIMIT 30")
+    abstract suspend fun searchMovies(query: String): List<Movie>
+
     suspend fun saveMovie(movies: List<Movie>) {
         insert(movies)
     }

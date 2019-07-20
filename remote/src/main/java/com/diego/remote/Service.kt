@@ -39,4 +39,16 @@ interface Service {
         @Query("page") page: Int
     ): Response<ApiResult<Series>>
 
+    @GET("/search/movie")
+    suspend fun searchMovie(
+        @Query("api_key") key: String, @Query("language") language: String,
+        @Query("query") query: String, @Query("page") page: Int
+    ): Response<ApiResult<Movie>>
+
+    @GET("/search/tv")
+    suspend fun searchSeries(
+        @Query("api_key") key: String, @Query("language") language: String,
+        @Query("query") query: String, @Query("page") page: Int
+    ): Response<ApiResult<Series>>
+
 }

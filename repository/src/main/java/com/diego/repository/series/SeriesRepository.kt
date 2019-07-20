@@ -51,4 +51,25 @@ class SeriesRepository @Inject constructor(private val seriesRemote: SeriesRemot
             override suspend fun createCallAsync(): Response<ApiResult<Series>> =
                 seriesRemote.fetchSeriesTopRated(key, language)
         }.start()
+
+    suspend fun searchSeries(key: String, language: String, query: String): List<Series> =
+        object : DataDelivery<Response<ApiResult<Series>>, List<Series>>() {
+            override suspend fun processResponse(response: Response<ApiResult<Series>>): List<Series>? {
+                return if (response.isSuccessful && response.body() != null) {
+                    response.body()?.results
+                } else {
+                    null
+                }
+            }
+
+            override suspend fun saveCallResults(items: List<Series>) {
+                seriesDao.saveSeries(items)
+            }
+
+            override suspend fun loadFromLocal(): List<Series> =
+                seriesDao.searchSeries("%$query%")
+
+            override suspend fun createCallAsync(): Response<ApiResult<Series>> =
+                seriesRemote.searchSeries(key, language, query)
+        }.start()
 }
