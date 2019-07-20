@@ -71,7 +71,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/bottom_sheet"
-            android:background="@color/white"
+            android:background="@color/light_grey"
+            android:elevation="@dimen/constraint_elevation_bottom_sheet"
             app:behavior_hideable="true"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
@@ -90,13 +91,13 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textview_textsize_title_bottom_sheet"
+                android:textAlignment="center"
                 android:layout_marginTop="@dimen/textview_margintop_title_bottom_sheet"
                 android:layout_marginStart="@dimen/textview_marginhorizontal_title_bottom_sheet"
                 android:layout_marginEnd="@dimen/textview_marginhorizontal_title_bottom_sheet"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageViewPosterBottomSheet"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/textViewYearBottomSheet"
                 tools:text="Dilwale Dulhania Le Jayenge"/>
 
         <TextView
@@ -104,42 +105,39 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/textview_textsize_labels_bottom_sheet"
-                android:layout_marginTop="@dimen/textview_marginhorizontal_labels_bottom_sheet"
                 android:layout_marginStart="@dimen/textview_marginhorizontal_labels_bottom_sheet"
                 android:layout_marginEnd="@dimen/textview_marginhorizontal_labels_bottom_sheet"
                 app:layout_constraintTop_toBottomOf="@+id/textViewTitleBottomSheet"
-                app:layout_constraintStart_toEndOf="@+id/imageViewPosterBottomSheet"
-                app:layout_constraintEnd_toStartOf="@+id/textViewPopulatiryBottomSheet"
-                app:layout_constraintBottom_toTopOf="@+id/textViewAverageBottomSheet"
+                app:layout_constraintStart_toStartOf="@+id/textViewTitleBottomSheet"
+                app:layout_constraintEnd_toStartOf="@+id/textViewAverageBottomSheet"
+                app:layout_constraintBottom_toTopOf="@+id/textViewPopulatiryBottomSheet"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 tools:text="Year: 1995"/>
-
-        <TextView
-                android:id="@+id/textViewPopulatiryBottomSheet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/textview_textsize_labels_bottom_sheet"
-                android:layout_marginTop="@dimen/textview_marginhorizontal_labels_bottom_sheet"
-                android:layout_marginStart="@dimen/textview_marginhorizontal_labels_bottom_sheet"
-                android:layout_marginEnd="@dimen/textview_marginhorizontal_labels_bottom_sheet"
-                app:layout_constraintTop_toBottomOf="@+id/textViewTitleBottomSheet"
-                app:layout_constraintStart_toEndOf="@+id/textViewYearBottomSheet"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="@+id/textViewYearBottomSheet"
-                tools:text="Popularity: 14.643"/>
 
         <TextView
                 android:id="@+id/textViewAverageBottomSheet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/textview_textsize_labels_bottom_sheet"
-                android:layout_marginTop="@dimen/textview_margintop_labels_bottom_sheet"
+                android:layout_marginStart="@dimen/textview_marginhorizontal_labels_bottom_sheet"
+                android:layout_marginEnd="@dimen/textview_marginhorizontal_labels_bottom_sheet"
+                app:layout_constraintTop_toTopOf="@+id/textViewYearBottomSheet"
+                app:layout_constraintStart_toEndOf="@+id/textViewYearBottomSheet"
+                app:layout_constraintEnd_toEndOf="@id/textViewTitleBottomSheet"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewYearBottomSheet"
+                tools:text="Average: 9"/>
+
+        <TextView
+                android:id="@+id/textViewPopulatiryBottomSheet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_textsize_labels_bottom_sheet"
                 android:layout_marginStart="@dimen/textview_marginhorizontal_labels_bottom_sheet"
                 android:layout_marginEnd="@dimen/textview_marginhorizontal_labels_bottom_sheet"
                 app:layout_constraintTop_toBottomOf="@+id/textViewYearBottomSheet"
-                app:layout_constraintStart_toEndOf="@+id/imageViewPosterBottomSheet"
-                app:layout_constraintBottom_toTopOf="@+id/textViewOverviewBottomSheet"
-                tools:text="Average: 9"/>
+                app:layout_constraintStart_toStartOf="@+id/textViewTitleBottomSheet"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewPosterBottomSheet"
+                tools:text="Popularity: 14.643"/>
 
         <TextView
                 android:id="@+id/textViewOverviewBottomSheet"
@@ -147,13 +145,13 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/textview_textsize_labels_bottom_sheet"
                 android:ellipsize="end"
-                android:maxLines="6"
+                android:maxLines="7"
                 android:layout_marginTop="@dimen/textview_margintop_labels_bottom_sheet"
                 android:layout_marginStart="@dimen/textview_marginhorizontal_labels_bottom_sheet"
                 android:layout_marginEnd="@dimen/textview_marginhorizontal_labels_bottom_sheet"
                 android:layout_marginBottom="@dimen/textview_marginhorizontal_labels_bottom_sheet"
-                app:layout_constraintTop_toBottomOf="@+id/textViewAverageBottomSheet"
-                app:layout_constraintStart_toEndOf="@+id/imageViewPosterBottomSheet"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewPosterBottomSheet"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="Overview:\nRaj is a rich, carefree, happy-go-lucky second generation NRI. Simran is the daughter of Chaudhary Baldev Singh, who in spite of being an NRI is very strict about adherence to Indian values. Simran has left for India to be married to her childhood fiancÃ©. Raj leaves for India with a mission at his hands, to claim his lady love under the noses of her whole family. Thus begins a saga."/>

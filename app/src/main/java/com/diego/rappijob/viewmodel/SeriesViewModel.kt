@@ -20,15 +20,15 @@ class SeriesViewModel @Inject constructor(private val seriesUseCases: SeriesUseC
     private val _series = MediatorLiveData<Resource<List<Series>>>()
     val series: LiveData<Resource<List<Series>>> get() = _series
     private val key = BuildConfig.API_KEY
-    private val language = Utils.getLanguage()
 
     init {
-
+        loadSeries(Category.POPULAR)
     }
 
     fun loadSeries(category: Category) = viewModelScope.launch(Dispatchers.Main) {
         _series.value = Resource.loading()
         val series = async(Dispatchers.IO) {
+            val language = Utils.getLanguage()
             if (category == Category.TOP_RATED) {
                 seriesUseCases.fetchSeriesTopRated(key, language)
             } else {
@@ -41,6 +41,7 @@ class SeriesViewModel @Inject constructor(private val seriesUseCases: SeriesUseC
     fun searchSeries(query: String) = viewModelScope.launch(Dispatchers.Main) {
         _series.value = Resource.loading()
         val series = async(Dispatchers.IO) {
+            val language = Utils.getLanguage()
             seriesUseCases.searchSeries(key, language, query)
         }
         _series.value = Resource.success(series.await())

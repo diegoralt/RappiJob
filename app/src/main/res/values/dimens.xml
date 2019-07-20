@@ -16,8 +16,9 @@
     <dimen name="textview_textsize_year_item">12sp</dimen>
     <dimen name="textview_padding_year_item">4dp</dimen>
     <dimen name="textview_textsize_empty_items">20sp</dimen>
-    <dimen name="imageview_with_bottom_sheet">150dp</dimen>
-    <dimen name="imageview_height_bottom_sheet">180dp</dimen>
+    <dimen name="constraint_elevation_bottom_sheet">2dp</dimen>
+    <dimen name="imageview_with_bottom_sheet">130dp</dimen>
+    <dimen name="imageview_height_bottom_sheet">150dp</dimen>
     <dimen name="imageview_margin_bottom_sheet">16dp</dimen>
     <dimen name="textview_textsize_title_bottom_sheet">18sp</dimen>
     <dimen name="textview_margintop_title_bottom_sheet">16dp</dimen>

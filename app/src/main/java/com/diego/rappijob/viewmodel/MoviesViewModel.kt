@@ -20,7 +20,6 @@ class MoviesViewModel @Inject constructor(private val movieUseCases: MovieUseCas
     private val _movies = MediatorLiveData<Resource<List<Movie>>>()
     val movies: LiveData<Resource<List<Movie>>> get() = _movies
     private val key = BuildConfig.API_KEY
-    private val language = Utils.getLanguage()
 
     init {
         loadMovies(Category.POPULAR)
@@ -29,6 +28,7 @@ class MoviesViewModel @Inject constructor(private val movieUseCases: MovieUseCas
     fun loadMovies(category: Category) = viewModelScope.launch(Dispatchers.Main) {
         _movies.value = Resource.loading()
         val movies = async(Dispatchers.IO) {
+            val language = Utils.getLanguage()
             when (category) {
                 Category.POPULAR -> movieUseCases.fetchMoviesPopular(key, language)
                 Category.TOP_RATED -> movieUseCases.fetchMoviesTopRated(key, language)
@@ -41,6 +41,7 @@ class MoviesViewModel @Inject constructor(private val movieUseCases: MovieUseCas
     fun searchMovies(query: String) = viewModelScope.launch(Dispatchers.Main) {
         _movies.value = Resource.loading()
         val movies = async(Dispatchers.IO) {
+            val language = Utils.getLanguage()
             movieUseCases.searchMovies(key, language, query)
         }
         _movies.value = Resource.success(movies.await())
