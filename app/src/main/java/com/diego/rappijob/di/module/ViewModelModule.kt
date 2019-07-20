@@ -3,6 +3,7 @@ package com.diego.rappijob.di.module
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.diego.rappijob.viewmodel.MoviesViewModel
+import com.diego.rappijob.viewmodel.SeriesViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -24,6 +25,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MoviesViewModel::class)
     protected abstract fun movieListViewModel(moviesListViewModel: MoviesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SeriesViewModel::class)
+    protected abstract fun seriesListViewModel(seriesViewModel: SeriesViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

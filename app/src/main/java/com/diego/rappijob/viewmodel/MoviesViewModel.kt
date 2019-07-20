@@ -38,7 +38,7 @@ class MoviesViewModel @Inject constructor(private val movieUseCases: MovieUseCas
         _movies.value = Resource.success(movies.await())
     }
 
-    fun searchMovies(query: String) = viewModelScope.launch {
+    fun searchMovies(query: String) = viewModelScope.launch(Dispatchers.Main) {
         _movies.value = Resource.loading()
         val movies = async(Dispatchers.IO) {
             movieUseCases.searchMovies(key, language, query)

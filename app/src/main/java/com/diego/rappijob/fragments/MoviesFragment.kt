@@ -127,6 +127,7 @@ class MoviesFragment : Fragment(), OnItemSelectedListener<Movie> {
     }
 
     override fun onItemSelected(item: Movie) {
+        searchView.clearFocus()
         sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         Utils.loadImage(requireContext(), item.posterPath, imageViewPosterBottomSheet)
         textViewTitleBottomSheet.text = item.title
