@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
+    private var itemActual = R.id.action_movies
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,13 +21,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupView() {
         navController = findNavController(R.id.navHostFragment)
-        navigationBottom.setOnNavigationItemSelectedListener { item ->
-            if (item.itemId == R.id.action_movies && navController.currentDestination != SeriesFragmentDirections.destinationMovie()) {
-                navController.navigate(SeriesFragmentDirections.destinationMovie())
-            } else if (navController.currentDestination != MoviesFragmentDirections.destinationSeries()) {
-                navController.navigate(MoviesFragmentDirections.destinationSeries())
+        navigationBottom.setOnNavigationItemSelectedListener { itemSelected ->
+            if (itemSelected.itemId != itemActual) {
+                itemActual = itemSelected.itemId
+                if (itemSelected.itemId == R.id.action_movies) {
+                    navController.navigate(SeriesFragmentDirections.destinationMovie())
+                } else {
+                    navController.navigate(MoviesFragmentDirections.destinationSeries())
+                }
             }
-            true
+            false
         }
     }
 }
