@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/cardview_margin_item"
+        app:cardCornerRadius="@dimen/cardview_cornerradius_item"
+        app:cardElevation="@dimen/cardview_elevation_item"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/constraint_height_item">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewPoster"
+                android:layout_width="@dimen/constraint_match_size"
+                android:layout_height="@dimen/constraint_match_size"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/textViewTitle"
+                app:srcCompat="@drawable/vd_ic_poster_error"/>
+
+        <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="@dimen/constraint_match_size"
+                android:layout_height="@dimen/textview_height_title_item"
+                android:textSize="@dimen/textview_textsize_title_item"
+                android:textColor="@color/black"
+                android:padding="@dimen/textview_padding_title_item"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="Spider-Man: Far from Home"/>
+
+        <TextView
+                android:id="@+id/textViewYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_textsize_year_item"
+                android:textColor="@color/white"
+                android:background="@color/colorPrimary"
+                android:padding="@dimen/textview_padding_year_item"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/textViewTitle"
+                tools:text="2019"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

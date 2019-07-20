@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerDropdown"
+                android:layout_width="@dimen/dropdown_width"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dropdown_margin"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="@dimen/constraint_match_size"
+                android:layout_height="@dimen/constraint_match_size"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerDropdown"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:listitem="@layout/information_item"/>
+
+        <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerDropdown"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone"/>
+
+        <TextView
+                android:id="@+id/textViewEmptyItems"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_textsize_empty_items"
+                android:textColor="@color/black"
+                android:text="@string/empty_items"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerDropdown"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="No content"
+                android:visibility="gone"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottom_sheet"
+            android:background="@color/white"
+            app:behavior_hideable="true"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewPosterBottomSheet"
+                android:layout_width="@dimen/imageview_with_bottom_sheet"
+                android:layout_height="@dimen/imageview_height_bottom_sheet"
+                android:layout_margin="@dimen/imageview_margin_bottom_sheet"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/vd_ic_poster_error"/>
+
+        <TextView
+                android:id="@+id/textViewTitleBottomSheet"
+                android:layout_width="@dimen/constraint_match_size"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textview_textsize_title_bottom_sheet"
+                android:layout_marginTop="@dimen/textview_margintop_title_bottom_sheet"
+                android:layout_marginStart="@dimen/textview_marginhorizontal_title_bottom_sheet"
+                android:layout_marginEnd="@dimen/textview_marginhorizontal_title_bottom_sheet"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageViewPosterBottomSheet"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/textViewYearBottomSheet"
+                tools:text="Dilwale Dulhania Le Jayenge"/>
+
+        <TextView
+                android:id="@+id/textViewYearBottomSheet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_textsize_labels_bottom_sheet"
+                android:layout_marginTop="@dimen/textview_marginhorizontal_labels_bottom_sheet"
+                android:layout_marginStart="@dimen/textview_marginhorizontal_labels_bottom_sheet"
+                android:layout_marginEnd="@dimen/textview_marginhorizontal_labels_bottom_sheet"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTitleBottomSheet"
+                app:layout_constraintStart_toEndOf="@+id/imageViewPosterBottomSheet"
+                app:layout_constraintEnd_toStartOf="@+id/textViewPopulatiryBottomSheet"
+                app:layout_constraintBottom_toTopOf="@+id/textViewAverageBottomSheet"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                tools:text="Year: 1995"/>
+
+        <TextView
+                android:id="@+id/textViewPopulatiryBottomSheet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_textsize_labels_bottom_sheet"
+                android:layout_marginTop="@dimen/textview_marginhorizontal_labels_bottom_sheet"
+                android:layout_marginStart="@dimen/textview_marginhorizontal_labels_bottom_sheet"
+                android:layout_marginEnd="@dimen/textview_marginhorizontal_labels_bottom_sheet"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTitleBottomSheet"
+                app:layout_constraintStart_toEndOf="@+id/textViewYearBottomSheet"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewYearBottomSheet"
+                tools:text="Popularity: 14.643"/>
+
+        <TextView
+                android:id="@+id/textViewAverageBottomSheet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_textsize_labels_bottom_sheet"
+                android:layout_marginTop="@dimen/textview_margintop_labels_bottom_sheet"
+                android:layout_marginStart="@dimen/textview_marginhorizontal_labels_bottom_sheet"
+                android:layout_marginEnd="@dimen/textview_marginhorizontal_labels_bottom_sheet"
+                app:layout_constraintTop_toBottomOf="@+id/textViewYearBottomSheet"
+                app:layout_constraintStart_toEndOf="@+id/imageViewPosterBottomSheet"
+                app:layout_constraintBottom_toTopOf="@+id/textViewOverviewBottomSheet"
+                tools:text="Average: 9"/>
+
+        <TextView
+                android:id="@+id/textViewOverviewBottomSheet"
+                android:layout_width="@dimen/constraint_match_size"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_textsize_labels_bottom_sheet"
+                android:ellipsize="end"
+                android:maxLines="6"
+                android:layout_marginTop="@dimen/textview_margintop_labels_bottom_sheet"
+                android:layout_marginStart="@dimen/textview_marginhorizontal_labels_bottom_sheet"
+                android:layout_marginEnd="@dimen/textview_marginhorizontal_labels_bottom_sheet"
+                android:layout_marginBottom="@dimen/textview_marginhorizontal_labels_bottom_sheet"
+                app:layout_constraintTop_toBottomOf="@+id/textViewAverageBottomSheet"
+                app:layout_constraintStart_toEndOf="@+id/imageViewPosterBottomSheet"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="Overview:\nRaj is a rich, carefree, happy-go-lucky second generation NRI. Simran is the daughter of Chaudhary Baldev Singh, who in spite of being an NRI is very strict about adherence to Indian values. Simran has left for India to be married to her childhood fiancÃ©. Raj leaves for India with a mission at his hands, to claim his lady love under the noses of her whole family. Thus begins a saga."/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

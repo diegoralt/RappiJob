@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion 29
@@ -19,10 +19,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+            buildConfigField "String", "API_KEY", "\"17fca7ace9096900206bcc95813193a9\""
         }
-    }
-    dataBinding {
-        enabled = true
+        debug {
+            buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+            buildConfigField "String", "API_KEY", "\"17fca7ace9096900206bcc95813193a9\""
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -36,10 +39,29 @@ dependencies {
     implementation dependencies.app_compat
     implementation dependencies.constraint_layout
     implementation dependencies.android_material
+    implementation dependencies.navigation_fragment
+    implementation dependencies.navigation_ui
+    implementation dependencies.picasso
+    implementation dependencies.viewmodel
+    implementation dependencies.livedata
+    implementation dependencies.coroutine_core
+    implementation dependencies.coroutine_android
+    implementation dependencies.lifecycle_extensions
 
     def common_dependencies = rootProject.ext.common_dependencies
     implementation common_dependencies.kotlin
+    implementation common_dependencies.dagger_android
+    implementation common_dependencies.dagger_support
+    implementation common_dependencies.dagger
+    kapt common_dependencies.dagger_processor
+    kapt common_dependencies.dagger_compiler
     testImplementation common_dependencies.junit
     androidTestImplementation common_dependencies.test_runner
     androidTestImplementation common_dependencies.espresso_core
+
+    implementation project(path: ':domain')
+    implementation project(path: ':repository')
+    implementation project(path: ':remote')
+    implementation project(path: ':local')
+    implementation project(path: ':model')
 }

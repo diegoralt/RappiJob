@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/action_movies"
+            android:enabled="true"
+            android:icon="@drawable/vd_ic_movie"
+            android:title="@string/menu_movies"
+            app:showAsAction="ifRoom"/>
+    <item
+            android:id="@+id/action_series"
+            android:enabled="true"
+            android:icon="@drawable/vd_ic_series"
+            android:title="@string/menu_series"
+            app:showAsAction="ifRoom"/>
+</menu>

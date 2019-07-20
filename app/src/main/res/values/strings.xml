@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">RappiJob</string>
+    <string name="menu_movies">Movies</string>
+    <string name="menu_series">Series</string>
+    <string name="empty_items">No results</string>
+    <string name="no_internet">Check your internet connection</string>
+    <string name="year_label">Year: %s</string>
+    <string name="popularity_label">Popularity: %.2f</string>
+    <string name="average_label">Average: %.2f</string>
+    <string name="overview_label">Overview:\n%s</string>
+
+    <string-array name="array_dropdown">
+        <item>Popular</item>
+        <item>Top Rated</item>
+        <item>Upcoming</item>
+    </string-array>
 </resources>
