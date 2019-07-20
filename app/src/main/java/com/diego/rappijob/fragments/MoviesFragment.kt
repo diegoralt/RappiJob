@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -43,9 +44,13 @@ class MoviesFragment : Fragment(), OnItemSelectedListener<Movie> {
         AndroidSupportInjection.inject(this)
         viewModel = ViewModelProviders.of(requireActivity(), viewModelFactory)[MoviesViewModel::class.java]
         setupView()
+        sheetBehavior = BottomSheetBehavior.from(bottom_sheet)
+        snackbar = Utils.makeSnackbar(coordinatorLayout, R.string.no_internet)
         viewModel.movies.observe(this, Observer { results ->
             when (results.status) {
                 Resource.Companion.Status.LOADING -> {
+                    validateNetwork()
+                    sheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                     progressBar.visibility = View.VISIBLE
                     recyclerView.visibility = View.GONE
                     textViewEmptyItems.visibility = View.GONE
@@ -66,18 +71,14 @@ class MoviesFragment : Fragment(), OnItemSelectedListener<Movie> {
     }
 
     private fun setupView() {
-        sheetBehavior = BottomSheetBehavior.from(bottom_sheet)
-        snackbar = Utils.makeSnackbar(coordinatorLayout, R.string.no_internet)
-        val adapter = ArrayAdapter(
-            requireContext(),
-            R.layout.dropdown_popup_item,
+        spinnerDropdown.adapter = ArrayAdapter(
+            requireContext(), R.layout.dropdown_popup_item,
             resources.getStringArray(R.array.array_dropdown)
         )
-        spinnerDropdown.adapter = adapter
+
         spinnerDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapter: AdapterView<*>?, view: View?, item: Int, longItem: Long) {
-                validateNetwork()
-                sheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                searchView.onActionViewCollapsed()
                 viewModel.loadMovies(
                     when (item) {
                         1 -> Category.TOP_RATED
@@ -94,13 +95,42 @@ class MoviesFragment : Fragment(), OnItemSelectedListener<Movie> {
         val manager = GridLayoutManager(requireContext(), 3)
         recyclerView.layoutManager = manager
         recyclerView.adapter = movieAdapter
+
+        searchView.setOnSearchClickListener {
+            sheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        }
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(query: String?): Boolean {
+                if (!query.isNullOrBlank()) {
+                    if (query.length % 3 == 0) {
+                        viewModel.searchMovies(query)
+                    }
+                } else {
+                    viewModel.loadMovies(
+                        when (spinnerDropdown.selectedItemPosition) {
+                            1 -> Category.TOP_RATED
+                            2 -> Category.UPCOMING
+                            else -> Category.POPULAR
+                        }
+                    )
+                }
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (!query.isNullOrBlank()) {
+                    viewModel.searchMovies(query)
+                }
+                return false
+            }
+        })
     }
 
     override fun onItemSelected(item: Movie) {
         sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         Utils.loadImage(requireContext(), item.posterPath, imageViewPosterBottomSheet)
         textViewTitleBottomSheet.text = item.title
-        textViewYearBottomSheet.text = getString(R.string.year_label, item.releaseDate.subSequence(0,4))
+        textViewYearBottomSheet.text = getString(R.string.year_label, item.releaseDate.subSequence(0, 4))
         textViewPopulatiryBottomSheet.text = getString(R.string.popularity_label, item.popularity)
         textViewAverageBottomSheet.text = getString(R.string.average_label, item.voteAverage)
         textViewOverviewBottomSheet.text = getString(R.string.overview_label, item.overview)

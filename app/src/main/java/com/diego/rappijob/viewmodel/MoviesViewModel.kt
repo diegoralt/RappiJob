@@ -19,24 +19,30 @@ class MoviesViewModel @Inject constructor(private val movieUseCases: MovieUseCas
 
     private val _movies = MediatorLiveData<Resource<List<Movie>>>()
     val movies: LiveData<Resource<List<Movie>>> get() = _movies
+    private val key = BuildConfig.API_KEY
+    private val language = Utils.getLanguage()
 
     init {
         loadMovies(Category.POPULAR)
     }
 
-    fun loadMovies(category: Category) {
-        viewModelScope.launch(Dispatchers.Main) {
-            _movies.value = Resource.loading()
-            val movies = async(Dispatchers.IO) {
-                val key = BuildConfig.API_KEY
-                val language = Utils.getLanguage()
-                when (category) {
-                    Category.POPULAR -> movieUseCases.fetchMoviesPopular(key, language)
-                    Category.TOP_RATED -> movieUseCases.fetchMoviesTopRated(key, language)
-                    Category.UPCOMING -> movieUseCases.fetchMoviesUpcoming(key, language)
-                }
+    fun loadMovies(category: Category) = viewModelScope.launch(Dispatchers.Main) {
+        _movies.value = Resource.loading()
+        val movies = async(Dispatchers.IO) {
+            when (category) {
+                Category.POPULAR -> movieUseCases.fetchMoviesPopular(key, language)
+                Category.TOP_RATED -> movieUseCases.fetchMoviesTopRated(key, language)
+                Category.UPCOMING -> movieUseCases.fetchMoviesUpcoming(key, language)
             }
-            _movies.value = Resource.success(movies.await())
         }
+        _movies.value = Resource.success(movies.await())
+    }
+
+    fun searchMovies(query: String) = viewModelScope.launch {
+        _movies.value = Resource.loading()
+        val movies = async(Dispatchers.IO) {
+            movieUseCases.searchMovies(key, language, query)
+        }
+        _movies.value = Resource.success(movies.await())
     }
 }

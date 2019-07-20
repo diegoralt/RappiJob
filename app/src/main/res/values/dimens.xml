@@ -3,7 +3,7 @@
     <dimen name="constraint_match_size">0dp</dimen>
 
     <dimen name="dropdown_width">150dp</dimen>
-    <dimen name="dropdown_margin">10dp</dimen>
+    <dimen name="dropdown_margin">6dp</dimen>
     <dimen name="textview_textsize_dropdown">16sp</dimen>
     <dimen name="textview_padding_dropdown">14dp</dimen>
     <dimen name="cardview_margin_item">10dp</dimen>
